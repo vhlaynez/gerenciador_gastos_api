@@ -1,0 +1,22 @@
+{
+  "name": "controle_gastos",
+  "version": "1.0.0",
+  "description": "Aplicativo para controle de gastos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Hugo Laynez",
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-validator": "^4.3.0",
+    "mysql": "^2.15.0",
+    "moment": "^2.20.1"
+  },
+  "devDependencies": {
+    "moment": "^2.20.1"
+  }
+}

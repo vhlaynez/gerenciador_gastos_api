@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Gerenciador de Gastos</title>
+		
+		<!-- JQuery -->
+		<script src="js/jquery-2.2.1.js"></script>
+
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	
+		<!-- incluindo css -->
+		<link href="css/style.css" rel="stylesheet">
+
+		
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					<span class="navbar-brand"> Gerenciador de Gastos</span>
+				</div>
+
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li></span><a href="/"><strong>Home</strong> </a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+	    <div class="container">
+			<% if(validacao.length>0) { %>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-danger">
+							<strong>Atenção!</strong>
+							<ul>
+								<% for (var i=0; i<validacao.length; i++)  { %>
+									<li><%= validacao[i].msg%></li>
+								<% } %>
+							</ul>
+						</div>
+					</div>
+				</div>
+			<% } %>
+	    	<div class="row">
+	    		<div class="col-md-12">
+	    			<form action="/gastos/salvar" method="post">
+						<div class="form-group">
+							<label for="titulo" ><h3><strong>Local</strong></h3></label>
+							<input type="text" class="form-control" id="titulo" name="lugar" placeholder="Ex: Mercado">
+						</div>
+
+						<div class="form-group">
+							<label for="pwd" ><h3><strong>Valor</strong></h3></label>
+							<input type="number" class="form-control" id="resumo" name="valor" placeholder="R$00,00">
+						</div>
+						
+						<div class="form-group">
+							<label for="pwd" ><h3><strong>Data</strong></h3></label>
+							<input type="date" class="form-control" id="data_noticia" name="data_gasto">
+						</div>
+
+						<button type="submit" class="btn btn-info col-md-12 opcao"><h2>Cadastrar</h2></button>
+					</form>
+		    	</div>
+	    	</div>
+	    </div>
+	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+	</body>
+</html>
