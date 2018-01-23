@@ -17,9 +17,12 @@ module.exports.gastos_salvar = function(application, req, res){
 		}
 
 		var connection = application.config.dbConnection();
-		var gastosModel = new application.app.models.GastosDAO(connection);
+		var gastosModel = new application.models.GastosDAO(connection);
 
 		gastosModel.salvarGasto(gasto, function(error, result){
+			console.log(error);
 			res.redirect('/gastos');
+			connection.end();
+			console.log('encerrou conexao ao db');
 		});
 }
