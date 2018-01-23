@@ -4,6 +4,7 @@ var data = 'DD/MM/YYYY';
 module.exports.index = function(application, req, res){
 
 	var connection = application.config.dbConnection();
+	//Alterado conforme padrão Heroku
 	var gastosModel = new application.models.GastosDAO(connection);
 
 	gastosModel.get5UltimosGastos(function(error, result){
@@ -12,6 +13,4 @@ module.exports.index = function(application, req, res){
 		connection.end();
 		console.log('encerrou conexao ao db');
 	});
-
-	
 }

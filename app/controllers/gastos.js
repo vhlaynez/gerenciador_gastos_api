@@ -5,6 +5,7 @@ var data2 = 'DD/MM/YYYY [às] HH:mm';
 
 module.exports.gastos = function(application, req, res){
 	var connection = application.config.dbConnection();
+	//Alterado conforme padrão Heroku
 	var gastosModel = new application.models.GastosDAO(connection);
 
 	gastosModel.getGastos(function(error, result){
@@ -17,6 +18,7 @@ module.exports.gastos = function(application, req, res){
 
 module.exports.gasto = function(application, req, res){
 	var connection = application.config.dbConnection();
+	//Alterado conforme padrão Heroku
 	var gastosModel = new application.models.GastosDAO(connection);
 
 	var id_gasto= req.query;

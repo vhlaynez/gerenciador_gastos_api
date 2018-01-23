@@ -2,6 +2,10 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="author" content="Victor Hugo Laynez">
+		<meta name="generator" content="sublime text">
+		<meta name="description" content="Exemplo de app para controle de gastos">
+		<meta name="application-name" content="Gerenciador de Gastos">
 
 		<title>Gerenciador de Gastos</title>
 		
@@ -10,17 +14,14 @@
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-		<!-- bootstrap - link cdn -->
+		<!-- bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	
 		<!-- incluindo css -->
 		 <link href="css/style.css" rel="stylesheet"> 
-
-		
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -30,7 +31,6 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					
 					<span class="navbar-brand"> Gerenciador de Gastos</span>
 				</div>
 
@@ -53,8 +53,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% 	var soma =0;
+						<% 	var dataArray = [ ['Lugar', 'Valor'], ];
+                            var soma =0;
 							for (var i=0; i < gastos.length; i++) {
+                            dataArray.push([gastos[i].lugar, gastos[i].valor]);
 							soma = soma + gastos[i].valor;
 						%>
 							<tr style="text-align: center;" onclick="window.location='gasto?id_gasto=<%= gastos[i].id_gasto %>';">
@@ -68,47 +70,34 @@
 				<div class="well well-lg">
 					<h3 style="text-align: center;"><strong>Total: R$<%= soma;%></strong></h3>
 				</div>
-				<!-- <button type="button" class="btn btn-primary col-md-12"><h2>Total</h2><span class="badge"><h2>R$<%= soma;%></h2></span></button> -->
 			<% } %>
-		<button id=teste1 class="btn btn-primary">teste</button>
+			<div class="col-md-12">	
+				<div id="piechart" style="width: 100%; min-height: 450px;" ></div>
+			</div>
 		</div>
 
-		
-		<div id=teste></div>
-	    <!-- <div class="container">
-	    	<% if (gastos.length>0){%>
-	    		<% for(var i=0; i < gastos.length;i++) { %>
-			    	<div class="row">
-			    		<div class="col-md-12">
-			    			<div class="noticia_wrapper">
-				    			<a href="gasto" class="noticia_titulo"><%=gastos[i].lugar %></a>
-				    			<span class="noticia_data"><%=gastos[i].valor %></span>
-				    			<br />
-				    			<p class="noticia_resumo">
-				    				<%=gastos[i].data_gasto %>
-				    			</p>
-				    		</div>
-				    	</div>
-					</div>	
-				<% } %>
-			<% } %>
-	    </div> -->
-	
-
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	
+		
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		
 		<script type="text/javascript">
-			var html='<h4>Teste</h4>';
-			$('#teste').append(html);
-				
-				
-			
-		</script>
+					 
+			google.charts.load('current', {'packages':['corechart']});
+	      	google.charts.setOnLoadCallback(drawChart);
 
+	      	function drawChart() {
+
+		        var data = google.visualization.arrayToDataTable(<%- JSON.stringify(dataArray) %>);
+
+		        var options = {
+		          title: 'Meus gastos',
+		          is3D:true,
+		        };
+
+		        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+				chart.draw(data, options);
+	      	}
+    	</script>
 	</body>
 </html>
 
-
-           <!--  for (var i = 0; i < gastos.length; i++) {
-                var row = [gastos[i].lugar, gastos[i].valor];
-                dataArray.push(row); -->

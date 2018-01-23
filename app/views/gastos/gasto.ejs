@@ -1,24 +1,25 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
-		<meta charset="UTF-8">
+		<<meta charset="UTF-8">
+		<meta name="author" content="Victor Hugo Laynez">
+		<meta name="generator" content="sublime text">
+		<meta name="description" content="Exemplo de app para controle de gastos">
+		<meta name="application-name" content="Gerenciador de Gastos">
 
-		<title>Gerenciamento de Gastos</title>
+		<title>Gerenciador de Gastos</title>
 		
 		<!-- JQuery -->
 		<script src="js/jquery-2.2.1.js"></script>
 
-		<!-- bootstrap - link cdn -->
+		<!-- bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	
 		<!-- incluindo css -->
 		<link href="css/style.css" rel="stylesheet">
-
-		
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -28,7 +29,6 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					
 					<span class="navbar-brand"> Gerenciador de Gastos</span>
 				</div>
 
@@ -40,8 +40,7 @@
 			</div>
 		</nav>
 
-
-	    <div class="container">
+		<div class="container">
 	    	<div class="row">
 		    	<% if (gasto.length>0){%>
 		    		<% for(var i=0; i < gasto.length;i++) { %>
@@ -65,10 +64,6 @@
 			</div>
 	    </div>	  
 				    
-							
-					
-	
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	
 	</body>
 </html>
