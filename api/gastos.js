@@ -2,27 +2,25 @@ module.exports = app => {
     const  { existsOrError, notExistsOrError } = app.api.validation
 
     const save = (req, res) => {
-        const product = {...req.body}
-        if(req.params.id) product.id = req.params.id
-
+        const gasto = {...req.body}
+        if(req.params.id) gasto.id_gasto = req.params.id
         try{
-            existsOrError(product.name,'Nome não informado')
-            existsOrError(product.marca,'Marca não informado')
-            existsOrError(product.categoryId,'Categoria não informada')
-            existsOrError(product.userId,'Autor não informado')
+            existsOrError(gasto.lugar,'Local não informado')
+            existsOrError(gasto.valor,'Valor não informado')
+            existsOrError(gasto.data_gasto,'Data não informada')
         } catch(msg){
-            res.status(400).send(msg)
+            return res.status(400).send(msg)
         }
 
-        if(product.id){
-            app.db('products')
-                .update(product)
-                .where({id: product.id})
+        if(gasto.id_gasto){
+            app.db('gastos')
+                .update(gasto)
+                .where({id_gasto: gasto.id_gasto})
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else{
-            app.db('products')
-                .insert(product)
+            app.db('gastos')
+                .insert(gasto)
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         }
@@ -30,11 +28,11 @@ module.exports = app => {
 
     const remove = async(req,res) => {
         try {
-            const rowsDeleted = await app.db('products')
-                .where({id: req.params.id}).del()
+            const rowsDeleted = await app.db('gastos')
+                .where({id_gasto: req.params.id}).del()
             
             try{
-                existsOrError(rowsDeleted, 'Produto não encontrado')
+                existsOrError(rowsDeleted, 'Gasto não encontrado')
             } catch(msg){
                 return res.status(400).send(msg)
             }
@@ -54,19 +52,29 @@ module.exports = app => {
         const count = result['count(`id_gasto`)']
 
         app.db('gastos')
-            .select('id_gasto','lugar','valor')
+            .select('id_gasto','lugar','valor','data_gasto')
+            .orderBy('data_gasto','desc')
             .limit(limit).offset(page * limit - limit)
-            .then(products => res.json({data: products,count,limit}))
+            .then(gastos => res.json({data: gastos,count,limit}))
             .catch(err => res.status(500).send(err))
     }
 
     const getById = (req, res) => {
-        app.db('products')
-            .where({id: req.params.id})
+        app.db('gastos')
+            .where({id_gasto: req.params.id})
             .first()
-            .then(product => res.json(product))
+            .then(gasto => res.json(gasto))
             .catch(err => res.status(500).send(err))
     }
 
-    return {save,remove,get,getById}
+    const home = (req,res) =>{
+        app.db('gastos')
+        .select('id_gasto','lugar','valor','data_gasto')
+        .orderBy('id_gasto','desc')
+        .limit(3)
+        .then(gasto => res.json(gasto))
+        .catch(err => res.status(500).send(err))
+    }
+
+    return {save,remove,get,getById, home}
 }
