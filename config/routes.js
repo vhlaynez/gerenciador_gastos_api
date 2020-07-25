@@ -1,7 +1,7 @@
 module.exports = app => {
     app.route('/gastos')
         .get(app.api.gastos.get)
-        .put(app.api.gastos.save)
+        .post(app.api.gastos.save)
 
     app.route('/gastos/:id')
         .get(app.api.gastos.getById)
@@ -10,4 +10,7 @@ module.exports = app => {
 
     app.route('/home')
         .get(app.api.gastos.home)
+
+    app.route('/grafico')
+        .get(app.api.grafico.get)
 }

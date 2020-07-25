@@ -1,3 +1,5 @@
+const {authSecret} = require('../.env')
+
 module.exports = app => {
     function existsOrError(value, msg){
         if(!value) throw msg
@@ -18,5 +20,9 @@ module.exports = app => {
         if(valueA !== valueB) throw msg
     }
 
-    return { existsOrError, notExistsOrError, equalsOrError}
+    function api_key(value,msg){
+        if(value !== authSecret) throw msg
+    }
+
+    return { existsOrError, notExistsOrError, equalsOrError, api_key}
 }
